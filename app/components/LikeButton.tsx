@@ -22,14 +22,22 @@ export default function LikeButton({ postId }: { postId: string }) {
 
   // 2. Fungsi untuk menambah like di database
   const handleLike = async () => {
-    const newCount = likes + 1;
-    setLikes(newCount); // Update di layar dulu (biar cepat)
+  const newCount = likes + 1;
+  
+  // Kirim ke database
+  const { error } = await supabase
+    .from('posts_likes')
+    .upsert({ 
+      post_id: postId, 
+      count: newCount 
+    }, { onConflict: 'post_id' }); // Memberitahu Supabase untuk update jika ID sama
 
-    // Simpan ke database (Upsert: Update jika ada, Insert jika belum ada)
-    await supabase
-      .from('posts_likes')
-      .upsert({ post_id: postId, count: newCount });
-  };
+  if (error) {
+    console.error("Gagal menyimpan like:", error.message);
+  } else {
+    setLikes(newCount); // Hanya update di layar jika database berhasil
+  }
+};
 
   return (
     <button 
