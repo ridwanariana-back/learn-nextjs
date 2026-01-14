@@ -1,6 +1,16 @@
 import Link from 'next/link';
 import './globals.css';
 
+export const metadata = {
+  title: 'Portal Berita Saya | Belajar Next.js',
+  description: 'Website berita modern yang dibangun dengan Next.js 16 dan Tailwind CSS',
+  openGraph: {
+    title: 'Portal Berita Saya',
+    description: 'Belajar membuat web modern dari nol sampai online!',
+    images: ['https://images.unsplash.com/photo-1517694712202-14dd9538aa97'], // Gambar yang muncul di sosmed
+  },
+};
+
 export default function RootLayout({
   children,
 }: {
