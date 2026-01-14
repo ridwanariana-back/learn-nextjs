@@ -31,7 +31,7 @@ export default async function DetailBerita({ params }: { params: Promise<{ id: s
       <h1 className="text-4xl font-bold capitalize mb-4">{post.title}</h1>
       <hr className="mb-6 border-gray-300" />
       <p className="text-lg text-gray-700 leading-loose">{post.body}</p>
-      <LikeButton />  
+      <LikeButton postId={id} />  
     </div>
   );
 }
